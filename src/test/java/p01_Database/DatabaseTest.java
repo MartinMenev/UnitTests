@@ -16,18 +16,29 @@ public class DatabaseTest {
 
     @Before
     public void setUp() throws Exception {
-        database = new Database();
+        database = new Database(NUMBERS);
     }
 
     @Test (expected = OperationNotSupportedException.class)
-    public void testForExceptionIfSizeNot16 () throws OperationNotSupportedException {
+    public void testIfConstructorAcceptedZeroValues () throws OperationNotSupportedException {
+        Database database = new Database ();
+    }
 
-        assertEquals(16, database.getElements().length);
+    @Test (expected = OperationNotSupportedException.class)
+    public void testIfConstructorAcceptedMoreThan16Values() throws OperationNotSupportedException {
+        Integer[] testArray = new Integer[17];
+        Database database = new Database (testArray);
+    }
+
+    @Test
+    public void testIfConstructorSetCorrectElementsCount() throws OperationNotSupportedException {
+        int numberOfInputIntegers = NUMBERS.length;
+        Assert.assertEquals(numberOfInputIntegers, Arrays.stream(database.getElements()).count());
+        Assert.assertArrayEquals(NUMBERS, database.getElements());
     }
 
     @Test (expected = OperationNotSupportedException.class)
     public void testForExceptionIfAddedElementIsNull () throws OperationNotSupportedException {
-
         database.add(null);
     }
 
@@ -38,58 +49,29 @@ public class DatabaseTest {
         int initialSize = database.getElements().length;
 
         database.add(testValue);
-        int lastElementFromDB = database.getElements().length - 1;
+        int lastElementFromDB = database.getElements()[database.getElements().length -1];
 
         Assert.assertEquals(testValue, lastElementFromDB);
         Assert.assertEquals(initialSize + 1, database.getElements().length);
     }
 
-    @Test (expected = OperationNotSupportedException.class)
-    public void testForExceptionIfRemovingElementFromEmptyDatabase() throws OperationNotSupportedException {
-        Database database = new Database();
-        database.remove();
-    }
-
-    @Test (expected = OperationNotSupportedException.class)
-    public void testIfConstructorAcceptedZeroValues () throws OperationNotSupportedException {
-
-        Database database = new Database ();
-    }
-
-    @Test (expected = OperationNotSupportedException.class)
-    public void testIfConstructorAcceptedMoreThan16Values () throws OperationNotSupportedException {
-        Integer[] testArray = new Integer[17];
-        Database database = new Database (testArray);
-    }
-
-    @Test
-    public void testIfConstructorSetCorrectElementsCount () throws OperationNotSupportedException {
-
-        Database database = new Database (1,2,3,4,5);
-        Assert.assertEquals(5, Arrays.stream(database.getElements()).count());
-    }
-
-
     @Test
     public void testIfGetElementsReturnsElementsArray() throws OperationNotSupportedException {
-        Database database = new Database(1, 2, 4);
-        Integer[] array = database.getElements();
-        Assert.assertArrayEquals(array, database.getElements());
+        Assert.assertArrayEquals(NUMBERS, database.getElements());
     }
 
     @Test
     public void testRemoveElement () throws OperationNotSupportedException {
-        Database database = new Database(1, 2, 4);
         database.remove();
-        Assert.assertEquals(2, database.getElements().length);
+        Integer expectedInteger = NUMBERS[NUMBERS.length -2];
+        Assert.assertEquals(NUMBERS.length -1, database.getElements().length);
+        Assert.assertEquals(expectedInteger, database.getElements()[database.getElements().length -1]);
     }
-
-    @Test
-    public void testCreateBase () throws OperationNotSupportedException {
-        Integer[] numbers = {5, 8, 21, 68, -5};
-        Database database = new Database(numbers);
-        Assert.assertEquals(numbers.length, database.getElements().length);
-        Assert.assertEquals(numbers.length -1, database.getElements().length -1);
-        Assert.assertArrayEquals(numbers, database.getElements());
+    @Test (expected = OperationNotSupportedException.class)
+    public void testForExceptionIfRemovingElementFromEmptyDatabase() throws OperationNotSupportedException {
+        for (int i = 0; i < NUMBERS.length; i++) {
+            database.remove();
+        }
+        database.remove();
     }
 }
