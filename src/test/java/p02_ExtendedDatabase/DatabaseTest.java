@@ -87,6 +87,6 @@ public class DatabaseTest {
     @Test (expected = OperationNotSupportedException.class)
     public void testToFindByNotExistingId() throws OperationNotSupportedException {
         Person notExistingPerson = new Person(33333, "Martin");
-        Assert.assertEquals(notExistingPerson, database.findById(notExistingPerson.getId()));
+        database.findById(notExistingPerson.getId());
     }
 }
