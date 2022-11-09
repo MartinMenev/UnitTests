@@ -29,9 +29,9 @@ public class AlarmTest {
 
     @Test
     public void testAlarmWithNormalPressure() {
-        Sensor sensorWithBigPressure = Mockito.mock(Sensor.class);
-        when(sensorWithBigPressure.popNextPressurePsiValue()).thenReturn(18.0);
-        Alarm alarm = new Alarm(sensorWithBigPressure);
+        Sensor sensorWithNormalPressure = Mockito.mock(Sensor.class);
+        when(sensorWithNormalPressure.popNextPressurePsiValue()).thenReturn(18.0);
+        Alarm alarm = new Alarm(sensorWithNormalPressure);
         alarm.check();
         assertFalse(alarm.getAlarmOn());
     }
