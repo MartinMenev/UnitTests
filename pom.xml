@@ -5,8 +5,19 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>org.example</groupId>
+<<<<<<< HEAD
     <artifactId>untitled1</artifactId>
     <version>1.0-SNAPSHOT</version>
+=======
+    <artifactId>Testing-demo</artifactId>
+    <version>1.0-SNAPSHOT</version>
+
+    <properties>
+        <maven.compiler.source>18</maven.compiler.source>
+        <maven.compiler.target>18</maven.compiler.target>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    </properties>
+>>>>>>> aea2bddcf0b0d3e023c11cee05f13ba027384f02
     <dependencies>
         <dependency>
             <groupId>junit</groupId>
@@ -14,6 +25,7 @@
             <version>4.12</version>
             <scope>test</scope>
         </dependency>
+<<<<<<< HEAD
 
     </dependencies>
 
@@ -22,5 +34,18 @@
         <maven.compiler.target>18</maven.compiler.target>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
+=======
+        <dependency>
+            <groupId>org.mockito</groupId>
+            <artifactId>mockito-core</artifactId>
+            <version>3.3.3</version>
+            <scope>test</scope>
+        </dependency>
+
+
+    </dependencies>
+
+
+>>>>>>> aea2bddcf0b0d3e023c11cee05f13ba027384f02
 
 </project>
